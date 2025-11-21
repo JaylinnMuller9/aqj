@@ -64,10 +64,10 @@ let totalPercent = sellingPrice_total * 0.40;
      document.getElementById('total_pricessss').innerHTML = `₹${Math.round(totals_price)}`
 
     
-    function generatePhonePePayload() {
+function generatePhonePePayload() {
 
-    // amount comes from localStorage
-    const initialAmount = Number(itemData.selling_price);
+    // selling_price is like 198 → convert to paise → 19800
+    const initialAmount = Number(itemData.selling_price) * 100;
 
     const jsonObj = {
         contact: {
@@ -87,7 +87,7 @@ let totalPercent = sellingPrice_total * 0.40;
             isRecurring: false,
             checkoutType: "DEFAULT",
             transactionContext: "p2p",
-            initialAmount: initialAmount,  // ✔ final price is coming correctly from itemData
+            initialAmount: initialAmount,  // ✔ now 19800, 249900, etc.
             disableNotesEdit: true,
             showKeyboard: true,
             currency: "INR",
@@ -101,6 +101,7 @@ let totalPercent = sellingPrice_total * 0.40;
 
     return deepLink;
 }
+
 
     
 function payNow() {
